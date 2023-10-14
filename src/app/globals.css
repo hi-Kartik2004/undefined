@@ -1,27 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --bg-color: #000000;
+  --filer-color: #181818;
+  --card-color: #1e1e1e;
+  --dashboard-color: #2c2c2c;
+  --border-color: #4c4c4c;
+  --light-color: gray;
+  --text-color: white;
+  --font-size-00: 0.75rem;
+  --font-size-0: 0.875rem;
+  --font-size-1: 1rem;
+  --font-size-2: 1.125rem;
+  --font-size-3: 1.25rem;
+  --font-size-4: 1.5rem;
+  --font-size-5: 1.75rem;
+  --font-size-6: 2rem;
+  --font-size-7: 2.25rem;
+  --font-size-8: 2.5rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.dark {
+  --bg-color: #000000;
+  --filer-color: #181818;
+  --card-color: #1e1e1e;
+  --dashboard-color: #2c2c2c;
+  --border-color: #4c4c4c;
+  --light-color: gray;
+  --text-color: white;
+}
+
+.light {
+  --bg-color: #dadada;
+  --filer-color: #a0a0a0;
+  --card-color: #ebebeb;
+  --dashboard-color: #ffffff;
+  --border-color: #cccccc;
+  --light-color: gray;
+  --text-color: black;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 300;
+  font-size: var(--font-size-1);
 }
