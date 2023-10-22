@@ -14,7 +14,7 @@ const Password = (props) => {
         className="px-2 py-2 rounded-md w-full bg-light"
       />
       {showPassword ? (
-        <FaRegEye
+        <FaRegEyeSlash
           onClick={() => {
             setShowPassword(!showPassword);
           }}
@@ -22,7 +22,7 @@ const Password = (props) => {
           className="eye select-none absolute right-0"
         />
       ) : (
-        <FaRegEyeSlash
+        <FaRegEye
           onClick={() => {
             setShowPassword(!showPassword);
           }}
