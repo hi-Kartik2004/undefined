@@ -5,11 +5,14 @@ import Divider from "../components/Divider";
 import BlackBtn from "../components/BlackBtn";
 import Link from "next/link";
 import Password from "../components/Password";
+import BackTopNav from "../components/BackTopNav";
 
 const login = () => {
   return (
     <section className="min-h-screen flex flex-col items-center justify-center">
       <div className="max-w-[475px]  w-full flex items-center justify-center flex-col gap-2 my-2 rounded-lg px-5 py-5 card-color">
+      <BackTopNav route="/" text="Home" location="left" />
+      <BackTopNav route="/register" text="Register" location="right" />
         <div className="w-full flex justify-center my-2">
           <img src="./digital arrow.png" alt="logo" className="logo-size" />
         </div>

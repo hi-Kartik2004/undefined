@@ -54,6 +54,24 @@ body {
   font-size: var(--font-size-1);
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: gray;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(168, 168, 168);
+}
+
 a {
   color: var(--text-light-color);
   transition: all 0.3s ease-in-out;
