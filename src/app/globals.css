@@ -10,7 +10,9 @@
   --card-color: #1e1e1e;
   --dashboard-color: #2c2c2c;
   --border-color: #4c4c4c;
-  --light-color: gray;
+  --light-color: rgb(170, 170, 170);
+  --blue-color: #5500F7;
+  --light-blue-color: #ddcbff;
   --text-color: white;
   --font-size-00: 0.75rem;
   --font-size-0: 0.875rem;
@@ -50,4 +52,72 @@ body {
   font-family: "Poppins", sans-serif !important;
   font-weight: 300;
   font-size: var(--font-size-1);
+}
+
+a{
+  color: var(--text-light-color);
+  transition: all 0.3s ease-in-out;
+}
+
+a:hover{
+  color: var(--text-color)
+}
+
+.bg-color {
+  background-color: var(--bg-color);
+}
+
+.card-color {
+  background-color: var(--card-color);
+}
+
+.text-light-color {
+  color: var(--light-color);
+}
+
+.bg-light{
+  background-color: var(--dashboard-color);
+}
+
+.bg-blue{
+  background-color: var(--blue-color);
+}
+
+.bg-light-blue{
+  background-color: var(--light-blue-color);
+}
+
+.logo-size {
+  width: 200px;
+  /* height: 200px; */
+}
+
+.container {
+  max-width: 1200px;
+  background-color: red;
+}
+
+.divider{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.divider::after{
+  content: "";
+  width: 42%;
+  position: absolute;
+  height: 1px;
+  background-color: var(--border-color);
+  left: 0;
+}
+
+.divider::before{
+  content: "";
+  width: 42%;
+  position: absolute;
+  height: 1px;
+  background-color: var(--border-color);
+  right: 0;
 }
