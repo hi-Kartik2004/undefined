@@ -20,7 +20,7 @@ const Input = (props) => {
       {props.search ? (
         <BsSearch size={20} className="absolute left-4 top-2" />
       ) : (
-        "Not"
+        ""
       )}
     </div>
   );
