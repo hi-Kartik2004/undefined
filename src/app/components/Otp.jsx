@@ -8,7 +8,7 @@ const Otp = () => {
   return (
     <>
       <section className="min-h-screen flex flex-col items-center justify-center">
-        <BackTopNav route="/" text="Edit" location="left" />
+        <BackTopNav route="/register" text="Edit" location="left" />
         {/* <BackTopNav route="/login" text="Login" location="right" /> */}
         <div className="max-w-[475px]  w-full flex items-center justify-center flex-col gap-2 my-2 rounded-lg px-5 py-5 card-color sm:my-[2rem] mt-[3.5rem]">
           <div className="w-full flex justify-center my-2">

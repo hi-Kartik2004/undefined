@@ -1,128 +1,215 @@
-import Input from "@/app/components/Input";
-import Link from "next/link";
-import React from "react";
-import { LiaUploadSolid } from "react-icons/lia";
-import { MdAccountCircle } from "react-icons/md";
-import { BiSolidBell } from "react-icons/bi";
+"use client";
+import React, { useEffect, useState } from "react";
+import UploadCard from "@/app/components/UploadCard";
+import DashboardHeading from "@/app/components/DashboardHeading";
+import DashboardTopbar from "@/app/components/DashboardTopbar";
+import Sidebar from "@/app/components/Sidebar";
+import { BiMenuAltLeft } from "react-icons/bi";
 
-const page = ({ params }, props) => {
+const page = ({ params }) => {
+  let resp = [
+    {
+      id: 1,
+      title:
+        "Title of the collection of raw videos goes here and if long it might be...",
+      files: [
+        "file_name.mp4",
+        "fileName.com",
+        "fileName.png",
+        "fileName.jpeg",
+        "fileName.mp3",
+        "filename.vid",
+        "fileName.dev.com",
+      ],
+      count: -1,
+      time: "2019-01-20",
+      status: 1,
+    },
+    {
+      id: 2,
+      title:
+        "Title of the collection of raw videos goes here and if long it might be...",
+      files: [
+        "file_name.mp4",
+        "fileName.com",
+        "fileName.png",
+        "fileName.jpeg",
+        "fileName.mp3",
+        "filename.vid",
+        "fileName.dev.com",
+      ],
+      count: -1,
+      time: "2023-01-20",
+      status: 2,
+    },
+    {
+      id: 3,
+      title:
+        "Title of the collection of raw videos goes here and if long it might be...",
+      files: [
+        "file_name.mp4",
+        "fileName.com",
+        "fileName.png",
+        "fileName.jpeg",
+        "fileName.mp3",
+        "filename.vid",
+        "fileName.dev.com",
+      ],
+      count: -1,
+      time: "2023-01-20",
+      status: 3,
+    },
+    {
+      id: 4,
+      title:
+        "Title of the collection of raw videos goes here and if long it might be...",
+      files: [
+        "file_name.mp4",
+        "fileName.com",
+        "fileName.png",
+        "fileName.jpeg",
+        "fileName.mp3",
+        "filename.vid",
+        "fileName.dev.com",
+      ],
+      count: -1,
+      time: "2023-01-20",
+      status: 0,
+    },
+
+    {
+      id: 5,
+      title:
+        "Title of the collection of raw videos goes here and if long it might be...",
+      files: [
+        "file_name.mp4",
+        "fileName.com",
+        "fileName.png",
+        "fileName.jpeg",
+        "fileName.mp3",
+        "filename.vid",
+        "fileName.dev.com",
+      ],
+      count: -1,
+      time: "2023-01-20",
+      status: 3,
+    },
+
+    {
+      id: 6,
+      title:
+        "Title of the collection of raw videos goes here and if long it might be...",
+      files: [
+        "file_name.mp4",
+        "fileName.com",
+        "fileName.png",
+        "fileName.jpeg",
+        "fileName.mp3",
+        "filename.vid",
+        "fileName.dev.com",
+      ],
+      count: -1,
+      time: "2023-01-20",
+      status: 3,
+    },
+
+    {
+      id: 7,
+      title:
+        "Title of the collection of raw videos goes here and if long it might be...",
+      files: [
+        "file_name.mp4",
+        "fileName.com",
+        "fileName.png",
+        "fileName.jpeg",
+        "fileName.mp3",
+        "filename.vid",
+        "fileName.dev.com",
+      ],
+      count: -1,
+      time: "2023-01-01",
+      status: 3,
+    },
+  ];
+
+  resp.forEach((upload) => {
+    upload.count = upload.files.length;
+  });
+
+  resp.sort((a, b) => a.status - b.status);
+
+  function getQueryParams(url) {
+    const parameters = {};
+    const queryString = url.split("?")[1];
+    if (queryString) {
+      const pairs = queryString.split("&");
+      pairs.forEach((pair) => {
+        const [key, value] = pair.split("=");
+        parameters[key] = decodeURIComponent(value);
+      });
+    }
+
+    console.log(parameters);
+    return parameters;
+  }
+
+  const [uploads, setUploads] = useState([]);
+  useEffect(() => {
+    const queryParams = getQueryParams(window.location.href);
+    const selectedOption = queryParams.filter;
+    setUploads([]);
+    let filteredUploads = resp;
+
+    switch (selectedOption) {
+      case "progress":
+        filteredUploads = resp.filter((upload) => upload.status === 2);
+        break;
+      case "download-pending":
+        filteredUploads = resp.filter((upload) => upload.status === 1);
+        break;
+      case "review-pending":
+        filteredUploads = resp.filter((upload) => upload.status === 3);
+        break;
+      case "issues-raised":
+        filteredUploads = resp.filter((upload) => upload.status === 0);
+        break;
+      case "oldest-first":
+        filteredUploads = [...resp].sort(
+          (a, b) => new Date(a.time) - new Date(b.time)
+        );
+        break;
+      case "newest-first":
+        filteredUploads = [...resp].sort(
+          (a, b) => new Date(b.time) - new Date(a.time)
+        );
+        break;
+      default:
+        break;
+    }
+
+    setUploads(filteredUploads);
+  }, [window.location.href]);
+
   return (
     <section className="flex flex-col items-center justify-center">
-      <div className="max-w-[1480px] w-full flex gap-12">
-        <aside className="max-w-[200px] py-4 h-screen flex flex-col justify-between">
-          <div className="flex flex-col gap-2">
-            <div className="my-3">
-              <img
-                src="../digital arrow.png"
-                alt="logo"
-                className="logo-size"
-              />
-            </div>
+      <div className="max-w-[1480px] md:px-0 px-1 w-full flex md:gap-12 gap-6">
+        <div className="hidden sm:block">
+          <Sidebar />
+        </div>
 
-            <Link
-              href="/"
-              className="flex gap-2 p-2 w-full rounded-lg nav__link duration-300 ease-in-out"
-            >
-              <LiaUploadSolid size={20} />
-              <p>Drafts (4)</p>
-            </Link>
-
-            <Link
-              href="/"
-              className="flex gap-2 p-2 w-full rounded-lg nav__link duration-300 ease-in-out"
-            >
-              <LiaUploadSolid size={20} />
-              <p>Uploads (4)</p>
-            </Link>
-
-            <Link
-              href="/"
-              className="flex gap-2 p-2 w-full rounded-lg nav__link duration-300 ease-in-out"
-            >
-              <LiaUploadSolid size={20} />
-              <p>Issues (1)</p>
-            </Link>
-
-            <Link
-              href="/"
-              className="flex gap-2 p-2 w-full rounded-lg nav__link duration-200 ease-in-out"
-            >
-              <LiaUploadSolid size={20} />
-              <p>Editors (1)</p>
-            </Link>
-
-            <Link
-              href="/"
-              className="flex gap-2 p-2 w-full rounded-lg nav__link duration-300 ease-in-out"
-            >
-              <LiaUploadSolid size={20} />
-              <p>My Cloud</p>
-            </Link>
+        <div className="dashboard w-full max-h-[95vh] my-4 bg-light rounded-xl border border-gray-500 py-4 px-4 flex flex-col md:gap-6 gap-10 overflow-auto">
+          <div className="fixed bottom-0 left-0 w-full md:border-none border md:border-gray-500 rounded-lg p-2 md:bg-light md:bg-light card-color z-10 md:static">
+            <DashboardTopbar userId={params.id} />
           </div>
 
-          <div>
-            <Link
-              href="/"
-              className="flex gap-2 p-2 w-full rounded-lg nav__link duration-300 ease-in-out"
-            >
-              <LiaUploadSolid size={20} />
-              <p>My Plan</p>
-            </Link>
+          <DashboardHeading count={uploads.length} />
 
-            <Link
-              href="/"
-              className="flex gap-2 p-2 w-full rounded-lg nav__link duration-300 ease-in-out"
-            >
-              <LiaUploadSolid size={20} />
-              <p>Settings</p>
-            </Link>
-
-            <Link
-              href="/"
-              className="flex gap-2 p-2 w-full rounded-lg nav__link duration-300 ease-in-out"
-            >
-              <LiaUploadSolid size={20} />
-              <p>Logout</p>
-            </Link>
-          </div>
-        </aside>
-
-        <div className="dashboard w-full h-[95vh] my-4 bg-light rounded-xl border border-gray-500 py-4 px-4 flex flex-col gap-10">
-          <div className="flex w-full justify-between">
-            <form className="max-w-[500px] w-full">
-              <Input
-                placeholder="Search for files"
-                type="text"
-                dark="true"
-                rounded=""
-                search="true"
-              />
-            </form>
-
-            <div className="dashboard__links max-w-[300px] w-full flex justify-end gap-5">
-              <Link
-                href="/"
-                className="rounded-md bg-color p-1 flex justify-center items-center w-[40px] h-[40px] border border-gray-500"
-              >
-                <MdAccountCircle size={25} />
-              </Link>
-              <Link
-                href="/"
-                className="rounded-md bg-color p-1 flex justify-center items-center w-[40px] h-[40px] border border-gray-500"
-              >
-                <BiSolidBell size={25} />
-              </Link>
-            </div>
-          </div>
-
-          <div className="dashboard__content w-full h-full flex justify-between pl-2">
-            <h1 className="text-2xl">Uploads (4)</h1>
-            <select className=" outline-none px-2 max-w-[120px] w-full h-[40px] rounded-lg bg-color text-light-color">
-              <option value="e">Earliest</option>
-              <option value="e">Download Pending</option>
-              <option value="e">Review Pending</option>
-              <option value="e">Issues Raised</option>
-            </select>
+          <div className="flex flex-wrap gap-11 justify-center">
+            {uploads.map((upload, index) => (
+              <div key={index}>
+                <UploadCard details={upload} />
+              </div>
+            ))}
           </div>
         </div>
       </div>

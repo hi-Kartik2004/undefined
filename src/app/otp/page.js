@@ -2,11 +2,7 @@ import React from "react";
 import Otp from "../components/Otp";
 
 const page = () => {
-  return (
-    <div>
-      <Otp />
-    </div>
-  );
+  return <Otp />;
 };
 
 export default page;

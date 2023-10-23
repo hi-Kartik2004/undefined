@@ -10,10 +10,11 @@
   --card-color: #1e1e1e;
   --dashboard-color: #2c2c2c;
   --border-color: #4c4c4c;
-  --light-color: rgb(170, 170, 170);
+  --light-color: rgb(41, 41, 41);
   --blue-color: #5500f7;
   --light-blue-color: #ddcbff;
   --text-color: white;
+  --text-light-color: #b3b3b3;
   --font-size-00: 0.75rem;
   --font-size-0: 0.875rem;
   --font-size-1: 1rem;
@@ -32,18 +33,20 @@
   --card-color: #1e1e1e;
   --dashboard-color: #2c2c2c;
   --border-color: #4c4c4c;
-  --light-color: gray;
+  --light-color: rgb(34, 34, 34);
   --text-color: white;
+  --secondary-text-color: black;
 }
 
 .light {
-  --bg-color: #dadada;
-  --filer-color: #a0a0a0;
-  --card-color: #ebebeb;
-  --dashboard-color: #ffffff;
+  --bg-color: #ffffff;
+  --filer-color: #d1d1d1;
+  --card-color: #ebebeb; 
+  --dashboard-color: #ebebeb;
   --border-color: #cccccc;
-  --light-color: gray;
+  --light-color: rgb(196, 196, 196);
   --text-color: black;
+  --secondary-text-color: white;
 }
 
 body {
@@ -55,8 +58,8 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -90,11 +93,15 @@ a:hover {
 }
 
 .text-light-color {
-  color: var(--light-color);
+  color: var(--text-light-color);
+}
+
+.secondary-text-color{
+  color: var(--secondary-text-color);
 }
 
 .bg-light {
-  background-color: var(--dashboard-color);
+  background-color: var(--light-color);
 }
 
 .bg-blue {
@@ -146,4 +153,9 @@ a:hover {
 
 .nav__link:hover {
   background-color: var(--filer-color);
+}
+
+select{
+  outline: none;
+  border: 1px solid var(--border-color);
 }
