@@ -1,13 +1,27 @@
+"use client"
 import React from "react";
 import Input from "../components/Input";
 import HeroBtn from "../components/HeroBtn";
 import Divider from "../components/Divider";
-import BlackBtn from "../components/BlackBtn";
 import Link from "next/link";
 import Password from "../components/Password";
 import BackTopNav from "../components/BackTopNav";
+import GoogleAuth from "../components/GoogleAuth";
+import GithubAuth from "../components/GithubAuth";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const login = () => {
+
+  const router = useRouter();
+  const {status} = useSession();
+
+
+      if(status==='authenticated'){
+          router.push('/profile')
+      }
+
+
   return (
     <section className="min-h-screen flex flex-col items-center justify-center">
       <BackTopNav route="/" text="Home" location="left" />
@@ -44,9 +58,11 @@ const login = () => {
 
             <Divider text="OR" />
 
-            <BlackBtn text="Register with Google" icon="google" />
+            <GoogleAuth/>
+            <GithubAuth/>
+            {/* <BlackBtn text="Register with Google" icon="google" /> */}
 
-            <BlackBtn text="Register with Github" icon="github" />
+            {/* <BlackBtn text="Register with Github" icon="github" /> */}
 
             <Link
               href="/login"
