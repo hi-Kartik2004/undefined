@@ -1,13 +1,28 @@
+"use client"
 import React from "react";
 import Input from "../components/Input";
 import HeroBtn from "../components/HeroBtn";
 import Divider from "../components/Divider";
-import BlackBtn from "../components/BlackBtn";
 import Link from "next/link";
 import Password from "../components/Password";
 import BackTopNav from "../components/BackTopNav";
+import GoogleAuth from "../components/GoogleAuth";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import GithubAuth from "../components/GithubAuth";
 
 const login = () => {
+
+  const router = useRouter();
+  const {status} = useSession();
+
+
+      if(status==='authenticated'){
+          router.push('/profile')
+      }
+
+
+
   return (
     <section className="min-h-screen flex flex-col items-center justify-center">
       <div className="max-w-[475px]  w-full flex items-center justify-center flex-col gap-2 my-2 rounded-lg px-5 py-5 card-color">
@@ -40,9 +55,10 @@ const login = () => {
 
             <Divider text="OR" />
 
-            <BlackBtn text="Login with Google" icon="google" />
-
-            <BlackBtn text="Login with Github" icon="github" />
+            <GoogleAuth/>
+            <GithubAuth/>
+            {/* <BlackBtn text="Login with Google" icon="google" /> */}
+            {/* <BlackBtn text="Login with Github" icon="github" /> */}
 
             <Link
               href="/register"

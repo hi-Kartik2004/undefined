@@ -1,3 +1,4 @@
+import { NextAuthProvider } from "./Providers";
 import "./globals.css";
 import { Inter } from "next/font/google";
 
@@ -12,7 +13,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${inter.className}`}>
-        {<div className="sm:px-0 px-3">{children}</div>}
+        <NextAuthProvider>
+            {<div className="sm:px-0 px-3">{children}</div>}
+        </NextAuthProvider>
       </body>
     </html>
   );
