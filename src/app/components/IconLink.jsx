@@ -1,6 +1,5 @@
 import Link from "next/link";
 import React from "react";
-import { BsFillCloudCheckFill } from "react-icons/bs";
 import { FaCrown } from "react-icons/fa";
 import { LiaUploadSolid } from "react-icons/lia";
 import {
@@ -10,6 +9,7 @@ import {
 } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
 import { IoIosSettings } from "react-icons/io";
+import { BsFillCloudCheckFill } from "react-icons/bs";
 
 const IconLink = (props) => {
   return (
@@ -23,13 +23,11 @@ const IconLink = (props) => {
         ) : props.text == "Drafts" ? (
           <MdOutlineVideoSettings size={20} />
         ) : props.text == "My Cloud" ? (
-          <LiaUploadSolid size={20} />
+          <BsFillCloudCheckFill size={20} />
         ) : props.text == "Issues" ? (
           <MdReportProblem size={20} />
         ) : props.text == "Editors" ? (
           <MdGroups size={20} />
-        ) : props.text == "My Cloud" ? (
-          <BsFillCloudCheckFill size={20} />
         ) : props.text == "My Plan" ? (
           <FaCrown size={20} />
         ) : props.text == "Settings" ? (

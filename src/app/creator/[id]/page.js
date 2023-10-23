@@ -192,7 +192,7 @@ const page = ({ params }) => {
 
   return (
     <section className="flex flex-col items-center justify-center">
-      <div className="max-w-[1480px] md:px-0 px-1 w-full flex md:gap-12 gap-6">
+      <div className="max-w-[1480px] px-1 w-full flex md:gap-12 gap-6">
         <div className="hidden sm:block">
           <Sidebar />
         </div>
@@ -204,7 +204,7 @@ const page = ({ params }) => {
 
           <DashboardHeading count={uploads.length} />
 
-          <div className="flex flex-wrap gap-11 justify-center">
+          <div className="flex flex-wrap gap-10 justify-center">
             {uploads.map((upload, index) => (
               <div key={index}>
                 <UploadCard details={upload} />
