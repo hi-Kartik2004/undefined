@@ -4,7 +4,6 @@ import UploadCard from "@/app/components/UploadCard";
 import DashboardHeading from "@/app/components/DashboardHeading";
 import DashboardTopbar from "@/app/components/DashboardTopbar";
 import Sidebar from "@/app/components/Sidebar";
-import { BiMenuAltLeft } from "react-icons/bi";
 
 const page = ({ params }) => {
   let resp = [
@@ -153,7 +152,7 @@ const page = ({ params }) => {
     return parameters;
   }
 
-  const [uploads, setUploads] = useState([]);
+  const [uploads, setUploads] = useState([resp]);
   useEffect(() => {
     const queryParams = getQueryParams(window.location.href);
     const selectedOption = queryParams.filter;

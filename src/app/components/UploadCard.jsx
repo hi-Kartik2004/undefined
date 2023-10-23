@@ -6,33 +6,34 @@ import { HiPhotograph } from "react-icons/hi";
 import { RiMenu5Line } from "react-icons/ri";
 
 const UploadCard = ({ details }) => {
-  console.log(details);
+  //   console.log(details);
   return (
     <>
       <div className="p-4 max-w-[375px] rounded-xl w-full bg-color relative border border-gray-500">
-        <Link href={`?upload=${details.id}`} className="text-md text-white">
+        <Link href={`?upload=${details.id}`} className="text-md ">
           {details.title}
         </Link>
-        {details.files.slice(0, 3).map((file, index) => {
-          let icon = <AiOutlineLink size={20} />; // default icon
+        {details.files &&
+          details.files.slice(0, 3).map((file, index) => {
+            let icon = <AiOutlineLink size={20} />; // default icon
 
-          const extension = file.split(".").pop().toLowerCase();
-          if (["jpg", "jpeg", "png", "gif"].includes(extension)) {
-            icon = <HiPhotograph size={20} />;
-          } else if (["mp4", "avi", "mov"].includes(extension)) {
-            icon = <BiSolidVideo size={20} />;
-          }
+            const extension = file.split(".").pop().toLowerCase();
+            if (["jpg", "jpeg", "png", "gif"].includes(extension)) {
+              icon = <HiPhotograph size={20} />;
+            } else if (["mp4", "avi", "mov"].includes(extension)) {
+              icon = <BiSolidVideo size={20} />;
+            }
 
-          return (
-            <div
-              className="w-full card-color my-4 p-2 rounded-lg flex justify-between items-center"
-              key={index}
-            >
-              <p>{file}</p>
-              {icon}
-            </div>
-          );
-        })}
+            return (
+              <div
+                className="w-full card-color my-4 p-2 rounded-lg flex justify-between items-center"
+                key={index}
+              >
+                <p>{file}</p>
+                {icon}
+              </div>
+            );
+          })}
 
         <div className="w-full flex justify-between items-center my-4">
           <div className="flex gap-2 items-center group relative cursor-pointer">
