@@ -17,7 +17,7 @@ const page = () => {
   return (
     <div>
       
-      { status==='authenticated' &&
+      { (status==='authenticated' && session?.user) &&
       <div className="center flex flex-col">
        hello! you are successfully authenticated
         <div>
