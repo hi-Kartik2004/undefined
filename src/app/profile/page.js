@@ -16,9 +16,10 @@ const page = () => {
 
   return (
     <div>
-      hello! you are successfully authenticated
-    
+      
+      { status==='authenticated' &&
       <div className="center flex flex-col">
+       hello! you are successfully authenticated
         <div>
             User profile Image :
            <Image src={session?.user?.image} width={200} height={180} />
@@ -35,7 +36,7 @@ const page = () => {
     <button className="p-3 m-5 bg-white text-red-500 rounded-md hover:bg-red-300 hover:text-white"  onClick={()=>signOut()}>
         Logout
     </button>
-
+      }
     </div>
   )
 }
