@@ -16,7 +16,7 @@ export default function Home() {
             (<div className="flex flex-col">
             <Link href="/login">login</Link>
             <Link href="/register">sign Up</Link>
-            <Link href="/validate-otp">Validate-otp</Link>
+            <Link href="/otp">Validate-otp</Link>
             </div>)
 
         }
