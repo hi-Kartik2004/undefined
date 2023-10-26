@@ -1,21 +1,22 @@
 "use client";
 import React, { useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 
 const Page = () => {
   const router = useRouter();
   const { status, data: session } = useSession();
 
   useEffect(() => {
-    if (status !== "authenticated") {
+    // Check if the window object is defined (running on the client side)
+    if (typeof window !== "undefined" && status !== "authenticated") {
       router.push("/login");
     }
   }, [status, router]);
 
   if (status !== "authenticated") {
     // You might want to return a loading spinner or something while the session is being checked.
-    router.push("/login");
+    return null;
   }
 
   return (
