@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import PageLoader from "@/app/components/pageloader/Pageloader";
 
 const Page = () => {
   const router = useRouter();
@@ -13,7 +12,6 @@ const Page = () => {
     // Check if the window object is defined (running on the client side)
     if (typeof window !== "undefined" && status !== "authenticated") {
       router.push("/login");
-      return <PageLoader />;
     }
   }, [status, router]);
 

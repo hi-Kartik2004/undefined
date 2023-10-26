@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import React from "react";
 import Input from "../../components/Input";
 import HeroBtn from "../../components/HeroBtn";
@@ -10,15 +10,15 @@ import GoogleAuth from "../../components/GoogleAuth";
 import GithubAuth from "../../components/GithubAuth";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import PageLoader from "@/app/components/pageloader/Pageloader";
 
 const login = () => {
-  const router = useRouter();
-  const { status } = useSession();
 
-  if (status === "authenticated") {
-    router.push("/profile");
-    return <PageLoader />;
+  const router = useRouter();
+  const {status} = useSession();
+
+
+  if(status==='authenticated'){
+      router.push('/profile')
   }
 
   return (
@@ -51,26 +51,14 @@ const login = () => {
               <Password label="Confirm Password" type="password" />
             </div>
 
-            <div className="flex justify-around">
-              <label className="flex gap-2">
-                <input type="radio" name="user" className="" />
-                Creator
-              </label>
-
-              <label className="flex gap-2">
-                <input type="radio" name="user" className="" />
-                Editor
-              </label>
-            </div>
-
             <div>
               <HeroBtn text="Register" />
             </div>
 
             <Divider text="OR" />
 
-            <GoogleAuth />
-            <GithubAuth />
+            <GoogleAuth/>
+            <GithubAuth/>
             {/* <BlackBtn text="Register with Google" icon="google" /> */}
 
             {/* <BlackBtn text="Register with Github" icon="github" /> */}
