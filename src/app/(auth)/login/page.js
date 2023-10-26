@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import Input from "../../components/Input";
 import HeroBtn from "../../components/HeroBtn";
@@ -10,24 +10,23 @@ import GoogleAuth from "../../components/GoogleAuth";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import GithubAuth from "../../components/GithubAuth";
+import PageLoader from "@/app/components/pageloader/Pageloader";
 
 const login = () => {
-
   const router = useRouter();
-  const {status} = useSession();
+  const { status } = useSession();
 
+  if (status === "authenticated") {
+    router.push("/profile");
+    return <PageLoader />;
 
-      if(status==='authenticated'){
-          router.push('/profile')
-      }
-
-
+  }
 
   return (
     <section className="min-h-screen flex flex-col items-center justify-center">
       <div className="max-w-[475px]  w-full flex items-center justify-center flex-col gap-2 my-2 rounded-lg px-5 py-5 card-color">
-      <BackTopNav route="/" text="Home" location="left" />
-      <BackTopNav route="/register" text="Register" location="right" />
+        <BackTopNav route="/" text="Home" location="left" />
+        <BackTopNav route="/register" text="Register" location="right" />
         <div className="w-full flex justify-center my-2">
           <img src="./digital arrow.png" alt="logo" className="logo-size" />
         </div>
@@ -49,14 +48,26 @@ const login = () => {
               <Password label="Password" type="password" />
             </div>
 
+            <div className="flex justify-around">
+              <label className="flex gap-2">
+                <input type="radio" name="user" className="" />
+                Creator
+              </label>
+
+              <label className="flex gap-2">
+                <input type="radio" name="user" className="" />
+                Editor
+              </label>
+            </div>
+
             <div>
               <HeroBtn text="Login" />
             </div>
 
             <Divider text="OR" />
 
-            <GoogleAuth/>
-            <GithubAuth/>
+            <GoogleAuth />
+            <GithubAuth />
             {/* <BlackBtn text="Login with Google" icon="google" /> */}
             {/* <BlackBtn text="Login with Github" icon="github" /> */}
 
