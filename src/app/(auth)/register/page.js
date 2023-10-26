@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import Input from "../../components/Input";
 import HeroBtn from "../../components/HeroBtn";
@@ -12,13 +12,18 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 const login = () => {
-
   const router = useRouter();
-  const {status} = useSession();
+  const { status } = useSession();
 
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push("/profile");
+    }
+  }, [status, router]);
 
-  if(status==='authenticated'){
-      router.push('/profile')
+  if (status === "loading") {
+    // Render nothing or a loading spinner while checking the session
+    return null;
   }
 
   return (
@@ -57,8 +62,8 @@ const login = () => {
 
             <Divider text="OR" />
 
-            <GoogleAuth/>
-            <GithubAuth/>
+            <GoogleAuth />
+            <GithubAuth />
             {/* <BlackBtn text="Register with Google" icon="google" /> */}
 
             {/* <BlackBtn text="Register with Github" icon="github" /> */}
