@@ -17,10 +17,9 @@ const login = () => {
   const {status} = useSession();
 
 
-      if(status==='authenticated'){
-          router.push('/profile')
-      }
-
+  if(status==='authenticated'){
+      router.push('/profile')
+  }
 
   return (
     <section className="min-h-screen flex flex-col items-center justify-center">

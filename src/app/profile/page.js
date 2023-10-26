@@ -1,22 +1,29 @@
 "use client";
-import React from "react";
-import { useSession } from "next-auth/react";
+import React, { useEffect } from "react";
+import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { signOut } from "next-auth/react";
 
-const page = () => {
+const Page = () => {
   const router = useRouter();
   const { status, data: session } = useSession();
-  if (status != "authenticated") {
-    router.push("/login");
+
+  useEffect(() => {
+    // Check if the window object is defined (running on the client side)
+    if (typeof window !== "undefined" && status !== "authenticated") {
+      router.push("/login");
+    }
+  }, [status, router]);
+
+  if (status !== "authenticated") {
+    // You might want to return a loading spinner or something while the session is being checked.
+    return null;
   }
-  console.log(status);
 
   return (
     <div>
       hello! you are successfully authenticated
-      {/* <div className="center flex flex-col">
+      <div className="center flex flex-col">
         <div>
           User profile Image :
           <Image src={session?.user?.image} width={200} height={180} />
@@ -30,9 +37,9 @@ const page = () => {
         onClick={() => signOut()}
       >
         Logout
-      </button>*/}
+      </button>
     </div>
   );
 };
 
-export default page;
+export default Page;
