@@ -19,7 +19,7 @@ const Page = () => {
       router.replace("/profile");
       return null;
     }
-
+  } else {
     // Redirect on the client side
     router.push("/profile");
     return <PageLoader />;
