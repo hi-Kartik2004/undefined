@@ -10,29 +10,25 @@ import GoogleAuth from "../../components/GoogleAuth";
 import GithubAuth from "../../components/GithubAuth";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-
-const LoadingIndicator = () => {
-  return <div>Loading...</div>; // You can customize this loading indicator
-};
+import PageLoader from "@/app/components/pageloader/Pageloader";
 
 const register = () => {
   const { status } = useSession();
   const router = useRouter();
 
   if (status === "loading") {
-    return <LoadingIndicator />;
+    return <PageLoader />;
   }
 
   if (status === "authenticated") {
     // Redirect on the server side
     if (typeof window === "undefined") {
       router.replace("/profile");
-      return null; // Return null during SSR to avoid content flicker
+      return null;
     }
 
-    // Redirect on the client side
     router.push("/profile");
-    return <LoadingIndicator />; // Show loading indicator during client-side redirection
+    return <PageLoader />;
   }
 
   return (

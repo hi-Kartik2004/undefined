@@ -3,21 +3,26 @@ import React, { useEffect } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import PageLoader from "@/app/components/pageloader/Pageloader";
 
 const Page = () => {
+  const { status } = useSession();
   const router = useRouter();
-  const { status, data: session } = useSession();
 
-  useEffect(() => {
-    // Check if the window object is defined (running on the client side)
-    if (typeof window !== "undefined" && status !== "authenticated") {
-      router.push("/login");
+  if (status === "loading") {
+    return <PageLoader />;
+  }
+
+  if (status === "authenticated") {
+    // Redirect on the server side
+    if (typeof window === "undefined") {
+      router.replace("/profile");
+      return null;
     }
-  }, [status, router]);
 
-  if (status !== "authenticated") {
-    // You might want to return a loading spinner or something while the session is being checked.
-    return null;
+    // Redirect on the client side
+    router.push("/profile");
+    return <PageLoader />;
   }
 
   return (
