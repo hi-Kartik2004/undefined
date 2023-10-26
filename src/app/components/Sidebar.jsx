@@ -1,34 +1,36 @@
 import React from "react";
-import { LiaUploadSolid } from "react-icons/lia";
 import Link from "next/link";
 import IconLink from "./IconLink";
 
 const Sidebar = () => {
-  const navLinks = ["Drafts", "Uploads", "Issues", "Editors", "My Cloud"];
+  const navLinks = ["Drafts", "Uploads", "Issues", "Editors", "Cloud"];
   return (
     <>
       <div className="hidden md:block h-full">
         <aside className="max-w-[200px] py-4 max-h-screen h-full flex flex-col justify-between">
           <div className="flex flex-col gap-2 h-full">
             <div className="my-3">
-              <img
-                src="../digital arrow.png"
-                alt="logo"
-                className="logo-size"
-              />
+              <img src="/digital arrow.png" alt="logo" className="logo-size" />
             </div>
 
             <div>
               {navLinks.map((link, index) => {
-                return <IconLink text={link} count={4} key={index} />;
+                return (
+                  <IconLink
+                    text={link}
+                    href={`${link}`}
+                    count={4}
+                    key={index}
+                  />
+                );
               })}
             </div>
           </div>
 
           <div>
-            <IconLink text="My Plan" />
-            <IconLink text="Settings" />
-            <IconLink text="Logout" />
+            <IconLink text="My Plan" href="/plan" />
+            <IconLink text="Settings" href="/settings" />
+            <IconLink text="Logout" href="/logout" />
           </div>
         </aside>
       </div>
@@ -50,9 +52,10 @@ const Sidebar = () => {
             <h3 className="text-md" my-2>
               Personal
             </h3>
-            <IconLink text="My Plan" />
-            <IconLink text="Settings" />
-            <IconLink text="Logout" />
+            <IconLink text="Notification" href="/notifications" />
+            <IconLink text="My Plan" href="/plan" />
+            <IconLink text="Settings" href="/settings" />
+            <IconLink text="Logout" href="/logout" />
           </div>
         </aside>
       </div>
