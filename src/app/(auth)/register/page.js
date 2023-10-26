@@ -11,19 +11,28 @@ import GithubAuth from "../../components/GithubAuth";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
-const login = () => {
-  const router = useRouter();
-  const { status } = useSession();
+const LoadingIndicator = () => {
+  return <div>Loading...</div>; // You can customize this loading indicator
+};
 
-  useEffect(() => {
-    if (status === "authenticated") {
-      router.push("/profile");
-    }
-  }, [status, router]);
+const register = () => {
+  const { status } = useSession();
+  const router = useRouter();
 
   if (status === "loading") {
-    // Render nothing or a loading spinner while checking the session
-    return null;
+    return <LoadingIndicator />;
+  }
+
+  if (status === "authenticated") {
+    // Redirect on the server side
+    if (typeof window === "undefined") {
+      router.replace("/profile");
+      return null; // Return null during SSR to avoid content flicker
+    }
+
+    // Redirect on the client side
+    router.push("/profile");
+    return <LoadingIndicator />; // Show loading indicator during client-side redirection
   }
 
   return (
@@ -81,4 +90,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default register;
