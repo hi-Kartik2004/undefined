@@ -1,13 +1,13 @@
 "use client"
 import React from "react";
-import Input from "../components/Input";
-import HeroBtn from "../components/HeroBtn";
-import Divider from "../components/Divider";
+import Input from "../../components/Input";
+import HeroBtn from "../../components/HeroBtn";
+import Divider from "../../components/Divider";
 import Link from "next/link";
-import Password from "../components/Password";
-import BackTopNav from "../components/BackTopNav";
-import GoogleAuth from "../components/GoogleAuth";
-import GithubAuth from "../components/GithubAuth";
+import Password from "../../components/Password";
+import BackTopNav from "../../components/BackTopNav";
+import GoogleAuth from "../../components/GoogleAuth";
+import GithubAuth from "../../components/GithubAuth";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
