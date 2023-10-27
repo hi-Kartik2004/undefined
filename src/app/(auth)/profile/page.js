@@ -41,7 +41,7 @@ const Page = () => {
             />
           ) : (
             <img
-              src={user.image}
+              src={user && user.image}
               width={200}
               height={180}
               alt="user profile image from email"
@@ -49,8 +49,12 @@ const Page = () => {
           )}
         </div>
 
-        <div>UserName : {session ? session.user.name : `${user.username}`}</div>
-        <div>Email : {session ? session.user.email : `${user.email}`}</div>
+        <div>
+          UserName : {session ? session.user.name : `${user && user.username}`}
+        </div>
+        <div>
+          Email : {session ? session.user.email : `${user && user.email}`}
+        </div>
       </div>
       <button
         className="p-3 m-5 bg-white text-red-500 rounded-md hover:bg-red-300 hover:text-white"

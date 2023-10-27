@@ -5,7 +5,10 @@ import Link from "next/link";
 
 export default function Home() {
   const { status } = useSession();
-  const token = sessionStorage.getItem("token");
+  let token = null;
+  if (typeof window !== "undefined") {
+    token = sessionStorage.getItem("token");
+  }
 
   return (
     <main>
