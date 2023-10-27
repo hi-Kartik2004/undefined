@@ -4,8 +4,18 @@ import UploadCard from "@/app/components/UploadCard";
 import DashboardHeading from "@/app/components/DashboardHeading";
 import DashboardTopbar from "@/app/components/DashboardTopbar";
 import Sidebar from "@/app/components/Sidebar";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import PageLoader from "@/app/components/pageloader/Pageloader";
 
 const page = ({ params }) => {
+  const { status } = useSession();
+  const router = useRouter();
+  const token = sessionStorage.getItem("token");
+  let user = sessionStorage.getItem("user");
+  user = JSON.parse(user);
+  console.log(user);
+
   let resp = [
     {
       id: 1,
@@ -188,6 +198,24 @@ const page = ({ params }) => {
 
     setUploads(filteredUploads);
   }, [window.location.href]);
+
+  if (user && user.username !== params.id) {
+    router.replace(
+      user.userType == 1
+        ? `../../creator/${user.username}/uploads`
+        : `../../editor/${user.username}/uploads`
+    );
+    return <PageLoader />;
+  }
+
+  if (status === "loading") {
+    return <PageLoader />;
+  }
+
+  if (status !== "authenticated" && !token) {
+    router.push("/login");
+    return <PageLoader />;
+  }
 
   return (
     <section className="flex flex-col items-center justify-center">

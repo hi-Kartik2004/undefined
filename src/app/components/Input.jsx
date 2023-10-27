@@ -1,11 +1,12 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { BsSearch } from "react-icons/bs";
 
-const Input = (props) => {
+const Input = forwardRef((props, ref) => {
   return (
     <div className="relative">
       {props.label && <label className="text-sm my-2">{props.label}</label>}
       <input
+        ref={ref}
         type={props.type}
         placeholder={props.placeholder}
         required={props.required}
@@ -20,6 +21,6 @@ const Input = (props) => {
       )}
     </div>
   );
-};
+});
 
 export default Input;

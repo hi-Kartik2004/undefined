@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import PageLoader from "@/app/components/pageloader/Pageloader";
 
-const Page = () => {
+const Page = ({ params }) => {
   const token = sessionStorage.getItem("token");
   let user = sessionStorage.getItem("user");
   const { data: session, status } = useSession();
@@ -13,6 +13,15 @@ const Page = () => {
   user = JSON.parse(user);
 
   if (status === "loading" && !token) {
+    return <PageLoader />;
+  }
+
+  if (user && user.username !== params.id) {
+    router.push(
+      user.userType == 1
+        ? `/creator/${user.username}`
+        : `/editor/${user.username}`
+    );
     return <PageLoader />;
   }
 
