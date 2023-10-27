@@ -6,19 +6,24 @@ import Image from "next/image";
 import PageLoader from "@/app/components/pageloader/Pageloader";
 
 const Page = () => {
-  const token = sessionStorage.getItem("token");
-  let user = sessionStorage.getItem("user");
   const { data: session, status } = useSession();
+  let user = null;
+  let token = null;
   const router = useRouter();
-  user = JSON.parse(user);
+  if (typeof window !== "undefined") {
+    token = sessionStorage.getItem("token");
+    user = sessionStorage.getItem("user");
 
-  if (status === "loading" && !token) {
-    return <PageLoader />;
-  }
+    user = JSON.parse(user);
 
-  if (!session && !token) {
-    router.push("/login");
-    return <PageLoader />;
+    if (status === "loading" && !token) {
+      return <PageLoader />;
+    }
+
+    if (!session && !token) {
+      router.push("/login");
+      return <PageLoader />;
+    }
   }
 
   return (

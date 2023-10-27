@@ -13,13 +13,16 @@ import { useSession } from "next-auth/react";
 import PageLoader from "@/app/components/pageloader/Pageloader";
 
 const register = () => {
-  const { status } = useSession();
   const router = useRouter();
-  const token = sessionStorage.getItem("token");
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
   const [userType, setUserType] = useState("creator");
+  const { status } = useSession();
+  let token = null;
+  if (typeof window !== "undefined") {
+    token = sessionStorage.getItem("token");
+  }
 
   if (status === "loading") {
     return <PageLoader />;
@@ -27,7 +30,11 @@ const register = () => {
 
   if (status === "authenticated" || token) {
     if (typeof window === "undefined") {
-      router.replace("/profile");
+      router.push(
+        user.userType == 1
+          ? `/creator/${user.username}`
+          : `/editor/${user.username}`
+      );
       return null;
     }
 

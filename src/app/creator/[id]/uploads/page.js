@@ -9,13 +9,6 @@ import { useSession } from "next-auth/react";
 import PageLoader from "@/app/components/pageloader/Pageloader";
 
 const page = ({ params }) => {
-  const { status } = useSession();
-  const router = useRouter();
-  const token = sessionStorage.getItem("token");
-  let user = sessionStorage.getItem("user");
-  user = JSON.parse(user);
-  console.log(user);
-
   let resp = [
     {
       id: 1,
@@ -140,6 +133,18 @@ const page = ({ params }) => {
       status: 3,
     },
   ];
+
+  const { status } = useSession();
+  const router = useRouter();
+  let token = null,
+    user = {};
+  if (typeof window !== "undefined") {
+    token = sessionStorage.getItem("token");
+    user = sessionStorage.getItem("user");
+  }
+
+  user = JSON.parse(user);
+  console.log(user);
 
   resp.forEach((upload) => {
     upload.count = upload.files.length;

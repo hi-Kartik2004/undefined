@@ -15,7 +15,10 @@ import PageLoader from "@/app/components/pageloader/Pageloader";
 const login = () => {
   const { status } = useSession();
   const router = useRouter();
-  const token = sessionStorage.getItem("token");
+  let token = null;
+  if (typeof window !== "undefined") {
+    token = sessionStorage.getItem("token");
+  }
   const emailRef = useRef();
   const passwordRef = useRef();
   const [userType, setUserType] = useState("creator");
