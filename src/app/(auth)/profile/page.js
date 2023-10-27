@@ -20,7 +20,7 @@ const Page = () => {
   }
 
   if (!session) {
-    router.push("/login"); // Redirect to the login page if not authenticated
+    router.push("/login");
     return <PageLoader />;
   }
 

@@ -21,7 +21,6 @@ const login = () => {
   }
 
   if (status === "authenticated") {
-    // Redirect on the server side
     if (typeof window === "undefined") {
       router.replace("/profile");
       return null;
@@ -55,6 +54,16 @@ const login = () => {
 
             <div>
               <Password label="Password" type="password" />
+            </div>
+
+            <div className="flex justify-around">
+              <label className="flex gap-2">
+                <input type="radio" name="user" required /> <p>Creator</p>
+              </label>
+
+              <label className="flex gap-2">
+                <input type="radio" name="user" required /> <p>Editor</p>
+              </label>
             </div>
 
             <div>
