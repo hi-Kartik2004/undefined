@@ -7,6 +7,7 @@ const Dropdown = (props) => {
   let user;
   if (typeof window !== "undefined") {
     user = sessionStorage.getItem("user");
+    user = JSON.parse(user);
   }
   return (
     <>
