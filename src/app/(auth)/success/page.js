@@ -15,7 +15,7 @@ const success = () => {
     // const userTypeParam = getParams()?.userType;
     // const userType = userTypeParam ? parseInt(userTypeParam, 10) : null;
 
-    if (userType !== null && userType !== undefined) {
+    if (userType !== null && typeof window !== undefined) {
       session["username"] = session.user.email.split("@")[0];
       session["userType"] = userType;
       sessionStorage.setItem("token", session.accessToken);
