@@ -13,8 +13,7 @@ import GithubAuth from "../../components/GithubAuth";
 import PageLoader from "@/app/components/pageloader/Pageloader";
 
 const login = () => {
-
-  const [err,setErr] = useState("")
+  const [err, setErr] = useState("");
 
   const { status } = useSession();
   const router = useRouter();
@@ -55,59 +54,59 @@ const login = () => {
     };
 
     if (userType === "creator") {
-
-      const response = await fetch("https://uploadmate-api.vercel.app/api/user/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
-        
-        const data = await response.json()
-        
-        if(!response.ok){
-          setErr(data.error);
+      const response = await fetch(
+        "https://uploadmate-api.vercel.app/api/user/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
         }
+      );
 
-        if(response.ok){
+      const data = await response.json();
 
-          console.log(data);
-          const { token, email } = data;
-          data["userType"] = 1;
-          const user = JSON.stringify(data);
-          sessionStorage.setItem("user", user);
-          sessionStorage.setItem("token", token);
-          router.push(`/creator/${email.split("@")[0]}`);
+      if (!response.ok) {
+        setErr(data.error);
+      }
+
+      if (response.ok) {
+        console.log(data);
+        const { token, email } = data;
+        data["userType"] = 1;
+        const user = JSON.stringify(data);
+        sessionStorage.setItem("user", user);
+        sessionStorage.setItem("token", token);
+        router.push(`/creator/${email.split("@")[0]}`);
+      }
+    } else {
+      const response = await fetch(
+        "https://uploadmate-api.vercel.app/api/editor/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
         }
-          
-    }
+      );
 
-     else {
-      const response = await fetch("https://uploadmate-api.vercel.app/api/editor/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
-       
-          const data = await response.json()
-          
-          if(!response.ok){
-            setErr(data.error);
-          }
+      const data = await response.json();
 
-          if(response.ok){
+      if (!response.ok) {
+        setErr(data.error);
+      }
 
-            console.log(data);
-            const { token, email } = data;
-            data["userType"] = 2;
-            const user = JSON.stringify(data);
-            sessionStorage.setItem("user", user);
-            sessionStorage.setItem("token", token);
-            router.push(`/editor/${email.split("@")[0]}`);
-          }  
+      if (response.ok) {
+        console.log(data);
+        const { token, email } = data;
+        data["userType"] = 2;
+        const user = JSON.stringify(data);
+        sessionStorage.setItem("user", user);
+        sessionStorage.setItem("token", token);
+        router.push(`/editor/${email.split("@")[0]}`);
+      }
     }
   };
 
@@ -170,15 +169,15 @@ const login = () => {
               </div>
             </form>
 
-            {
-              err && 
+            {err && (
               <div className="bg-red-500 p-4 text-center border rounded-sm border-white ">
-               ⚠ {err}
+                ⚠ {err}
               </div>
-            }
+            )}
             <Divider text="OR" />
 
-            <GoogleAuth />
+            <GoogleAuth userType={1} text="Login as Creator with Google" />
+            <GoogleAuth userType={2} text="Login as Editor with Google" />
             <GithubAuth />
             {/* <BlackBtn text="Login with Google" icon="google" /> */}
             {/* <BlackBtn text="Login with Github" icon="github" /> */}

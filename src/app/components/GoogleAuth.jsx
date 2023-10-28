@@ -4,7 +4,7 @@ import { FcGoogle } from "react-icons/fc";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-const GoogleAuth = () => {
+const GoogleAuth = ({ text, userType }) => {
   const router = useRouter();
   const [redirecting, setRedirecting] = useState(false);
 
@@ -12,7 +12,7 @@ const GoogleAuth = () => {
     try {
       const result = await signIn("google", {
         redirect: false,
-        callbackUrl: "/success?userType=1",
+        callbackUrl: {`/success?userType=${userType}`},
       });
 
       if (result?.error) {
@@ -52,7 +52,7 @@ const GoogleAuth = () => {
       onClick={handleGoogleLogin}
       className="w-full bg-black px-2 py-2.5 rounded-md font-semibold text-md duration-100 border border-gray-600 flex items-center justify-center gap-3 hover:bg-gray-900"
     >
-      <FcGoogle size={20} /> Login with Google
+      <FcGoogle size={20} /> {text}
     </button>
   );
 };
