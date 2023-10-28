@@ -11,7 +11,6 @@ const GoogleAuth = () => {
     try {
       const result = await signIn("google", {
         redirect: false,
-        callbackUrl: "/creator/1",
       });
 
       // Check if the login was successful and user details are available
