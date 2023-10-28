@@ -20,31 +20,9 @@ const Logout = () => {
     }
   }
 
-  router.replace("/login");
+  router.push("/login");
+  return <PageLoader />;
 
-  //   if (status === "loading") {
-  //     return <PageLoader />;
-  //   }
-
-  //   if (status === "authenticated") {
-  //     signOut();
-  //     router.push("/login");
-  //   }
-
-  //   if (token) {
-  //     if (typeof window === "undefined") {
-  //       sessionStorage.removeItem("token");
-  //       sessionStorage.removeItem("user");
-  //       router.replace("/login");
-  //       return null;
-  //     }
-
-  //     router.push("/login");
-  //     return <PageLoader />;
-  //   } else {
-  //     router.push("/login");
-  //     return <PageLoader />;
-  //   }
 };
 
 export default Logout;
