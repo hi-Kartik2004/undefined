@@ -14,8 +14,10 @@ const Logout = () => {
   if (status === "authenticated") {
     signOut();
   } else {
-    sessionStorage.removeItem("token");
-    sessionStorage.removeItem("user");
+    if (typeof window !== "undefined") {
+      sessionStorage.removeItem("token");
+      sessionStorage.removeItem("user");
+    }
   }
 
   router.replace("/login");

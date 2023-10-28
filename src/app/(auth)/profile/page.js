@@ -13,9 +13,9 @@ const Page = ({ params }) => {
   if (typeof window !== "undefined") {
     token = sessionStorage.getItem("token");
     user = sessionStorage.getItem("user");
+    user = JSON.parse(user);
   }
   const { data: session, status } = useSession();
-  user = JSON.parse(user);
 
   if (status === "loading" && !token) {
     return <PageLoader />;
