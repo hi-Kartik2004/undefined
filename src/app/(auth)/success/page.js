@@ -1,11 +1,12 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 const Success = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
-  const { userType } = router.query;
+  const searchParams = useSearchParams();
+  const userType = searchParams.get("userType");
 
   if (status === "loading") {
     return <div>loading...</div>;
