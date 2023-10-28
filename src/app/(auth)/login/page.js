@@ -63,6 +63,7 @@ const login = () => {
         .then((data) => {
           console.log(data);
           const { token, email } = data;
+          data["userType"] = 1;
           const user = JSON.stringify(data);
           sessionStorage.setItem("user", user);
           sessionStorage.setItem("token", token);
@@ -83,6 +84,7 @@ const login = () => {
         .then((data) => {
           console.log(data);
           const { token, email } = data;
+          data["userType"] = 2;
           const user = JSON.stringify(data);
           sessionStorage.setItem("user", user);
           sessionStorage.setItem("token", token);
