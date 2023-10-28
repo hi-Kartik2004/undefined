@@ -6,10 +6,11 @@ import Mobilenav from "./Mobilenav";
 import FormDialog from "./FormDialog";
 import AvatarBadge from "./Avatar";
 import Dropdown from "./Dropdown";
+import FormDialogForVideo from "./FormDialogForVideo";
 
 const DashboardTopbar = (props) => {
   const href = window.location.href;
-  const dialogFormFields = {
+  const dialogFormFieldsForFolder = {
     text: "Add Folder",
     subheading: "Fill up the details below",
     fields: [
@@ -43,10 +44,10 @@ const DashboardTopbar = (props) => {
             <FormDialog
               text="Add Folder"
               subheading="Fill up the details below"
-              children={dialogFormFields}
+              children={dialogFormFieldsForFolder}
             />
           ) : (
-            <FormDialog
+            <FormDialogForVideo
               text="Add Video"
               subheading="Fill up the details below"
               children={dialogFormFields}
@@ -54,6 +55,7 @@ const DashboardTopbar = (props) => {
           )}
 
           <Dropdown
+            avatar="true"
             links={[
               {
                 text: "View Profile",

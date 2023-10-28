@@ -224,7 +224,11 @@ const page = ({ params }) => {
 
   return (
     <>
-      <DashboardHeading text="Uploads" count={uploads.length} />
+      <DashboardHeading
+        showSelect="true"
+        text="Uploads"
+        count={uploads.length}
+      />
 
       <div className="flex flex-wrap gap-10 justify-center mt-5">
         {uploads.map((upload, index) => (

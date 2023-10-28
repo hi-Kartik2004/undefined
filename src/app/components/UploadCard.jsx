@@ -10,7 +10,10 @@ const UploadCard = ({ details }) => {
   return (
     <>
       <div className="p-4 max-w-[375px] rounded-xl w-full bg-color relative border border-gray-500">
-        <Link href={`?upload=${details.id}`} className="text-md ">
+        <Link
+          href={`?upload=${details.id}`}
+          className="text-md overflow-hidden overflow-ellipsis whitespace-normal max-w-[calc(100% - 1.5rem)] line-clamp-2 text-color"
+        >
           {details.title}
         </Link>
         {details.files &&

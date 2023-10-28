@@ -1,4 +1,5 @@
-import { Avatar, Button, DropdownMenu } from "@radix-ui/themes";
+"use client";
+import { DropdownMenu } from "@radix-ui/themes";
 import React from "react";
 import AvatarBadge from "./Avatar";
 import Link from "next/link";
@@ -13,9 +14,23 @@ const Dropdown = (props) => {
     <>
       <DropdownMenu.Root>
         <DropdownMenu.Trigger className="cursor-pointer">
-          <button className="outline-none border border-gray-500 rounded-lg">
-            <AvatarBadge src={user.image} />
-          </button>
+          {props.avatar ? (
+            <button className="outline-none border border-gray-500 rounded-lg">
+              <AvatarBadge src={user.image} />
+            </button>
+          ) : props.icon ? (
+            <button className="flex justify-center outline-none hover:bg-blue-500 p-1 rounded-md">
+              {props.icon}
+            </button>
+          ) : props.text ? (
+            <button className="outline-none border border-gray-500 rounded-lg text-sm p-2 hover:bg-blue-500 bg-filter">
+              {props.text}
+            </button>
+          ) : (
+            <button className="outline-none border border-gray-500 rounded-lg text-sm p-1">
+              options
+            </button>
+          )}
         </DropdownMenu.Trigger>
         <DropdownMenu.Content className="mt-1">
           {props.links.map((link, index) => {
@@ -25,7 +40,13 @@ const Dropdown = (props) => {
                   <Link href={`/${link.href}`}>{link.text}</Link>
                 </DropdownMenu.Item>
               );
-            else {
+            else if (link.text === "Delete draft") {
+              return (
+                <DropdownMenu.Item key={index} color="red">
+                  <Link href={`${link.href}`}>{link.text}</Link>
+                </DropdownMenu.Item>
+              );
+            } else {
               return (
                 <DropdownMenu.Item key={index}>
                   {" "}

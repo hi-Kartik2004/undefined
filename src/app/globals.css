@@ -14,6 +14,7 @@
   --blue-color: #5500f7;
   --light-blue-color: #ddcbff;
   --text-color: white;
+  --light-text-color: #b1b1b1;
   --text-light-color: #b3b3b3;
   --font-size-00: 0.75rem;
   --font-size-0: 0.875rem;
@@ -41,7 +42,7 @@
 .light {
   --bg-color: #ffffff;
   --filer-color: #d1d1d1;
-  --card-color: #ebebeb; 
+  --card-color: #ebebeb;
   --dashboard-color: #ebebeb;
   --border-color: #cccccc;
   --light-color: rgb(196, 196, 196);
@@ -95,7 +96,11 @@ a:hover {
   color: var(--text-light-color);
 }
 
-.secondary-text-color{
+.text-color {
+  color: var(--text-color);
+}
+
+.secondary-text-color {
   color: var(--secondary-text-color);
 }
 
@@ -114,6 +119,10 @@ a:hover {
 .logo-size {
   width: 200px;
   /* height: 200px; */
+}
+
+.text-light {
+  color: var(--light-text-color);
 }
 
 .container {
@@ -154,12 +163,12 @@ a:hover {
   background-color: var(--filer-color);
 }
 
-select{
+select {
   outline: none;
   border: 1px solid var(--border-color);
 }
 
-textarea{
+textarea {
   outline: none;
   border: 1px solid var(--border-color);
   background-color: var(--card-color);
@@ -169,6 +178,6 @@ textarea{
   border-radius: 5px;
 }
 
-input{
+input {
   border: 1px solid var(--border-color);
 }

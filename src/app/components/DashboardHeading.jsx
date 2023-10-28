@@ -48,17 +48,21 @@ const DashboardHeading = (props) => {
         <h1 className="text-2xl">
           {props.text} ({props.count})
         </h1>
-        <select
-          className="outline-none px-2 max-w-[120px] w-full h-[40px] rounded-lg bg-color text-light-color"
-          onChange={handleFilter}
-        >
-          <option value="p">In Progress</option>
-          <option value="d">Download Pending</option>
-          <option value="r">Review Pending</option>
-          <option value="i">Issues Raised</option>
-          <option value="t">Oldest First</option>
-          <option value="n">Newest First</option>
-        </select>
+        {props.showSelect ? (
+          <select
+            className="outline-none px-2 max-w-[120px] w-full h-[40px] rounded-lg bg-color text-light-color"
+            onChange={handleFilter}
+          >
+            <option value="p">In Progress</option>
+            <option value="d">Download Pending</option>
+            <option value="r">Review Pending</option>
+            <option value="i">Issues Raised</option>
+            <option value="t">Oldest First</option>
+            <option value="n">Newest First</option>
+          </select>
+        ) : (
+          ""
+        )}
       </div>
     </>
   );
