@@ -16,6 +16,7 @@ const Page = ({ params }) => {
     user = JSON.parse(user);
   }
   const { data: session, status } = useSession();
+  console.log(session);
 
   if (status === "loading" && !token) {
     return <PageLoader />;
