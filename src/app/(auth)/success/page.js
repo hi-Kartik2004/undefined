@@ -5,20 +5,22 @@ import { useSession } from "next-auth/react";
 const success = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
+  const { userType } = router.query;
 
   if (status === "loading") {
     return <div>loading...</div>;
   }
 
   if (status === "authenticated") {
-    const userTypeParam = getParams()?.userType;
-    const userType = userTypeParam ? parseInt(userTypeParam, 10) : null;
+    // const userTypeParam = getParams()?.userType;
+    // const userType = userTypeParam ? parseInt(userTypeParam, 10) : null;
 
     if (userType !== null && userType !== undefined) {
       session["username"] = session.user.email.split("@")[0];
       session["userType"] = userType;
       sessionStorage.setItem("token", session.accessToken);
       sessionStorage.setItem("user", JSON.stringify(session));
+      console.lop(session);
 
       const routePath =
         userType === 1
