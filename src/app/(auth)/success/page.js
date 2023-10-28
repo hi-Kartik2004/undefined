@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
-const success = () => {
+const Success = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
   const { userType } = router.query;
@@ -12,18 +12,16 @@ const success = () => {
   }
 
   if (status === "authenticated") {
-    // const userTypeParam = getParams()?.userType;
-    // const userType = userTypeParam ? parseInt(userTypeParam, 10) : null;
-
-    if (userType !== null && typeof window !== undefined) {
+    if (userType !== null && typeof window !== "undefined") {
+      // Check if window is undefined, not if it's not undefined
       session["username"] = session.user.email.split("@")[0];
-      session["userType"] = userType;
+      session["userType"] = parseInt(userType, 10); // Parse userType as an integer
       sessionStorage.setItem("token", session.accessToken);
       sessionStorage.setItem("user", JSON.stringify(session));
-      console.lop(session);
+      console.log(session); // Fix typo: "lop" should be "log"
 
       const routePath =
-        userType === 1
+        userType === "1" // Compare userType as a string
           ? `/creator/${session.username}`
           : `/editor/${session.username}`;
       router.push(routePath);
@@ -35,4 +33,4 @@ const success = () => {
   return <div>loading...</div>;
 };
 
-export default success;
+export default Success;
