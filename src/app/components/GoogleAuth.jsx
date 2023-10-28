@@ -22,7 +22,7 @@ const GoogleAuth = () => {
       const userWithUsername = { ...result.user, username };
       sessionStorage.setItem("user", JSON.stringify(userWithUsername));
 
-      router.push(`/creator/${result.user.email.split("@")[0]}}`);
+      router.push(`/creator/${result.user.email.split("@")[0]}`);
     }
   };
 
