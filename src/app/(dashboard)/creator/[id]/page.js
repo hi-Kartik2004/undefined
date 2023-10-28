@@ -15,12 +15,13 @@ const Page = ({ params }) => {
     user = sessionStorage.getItem("user");
     user = JSON.parse(user);
   }
-  const { data: session, status } = useSession();
-  console.log(session);
+  const session = null;
+  // const { data: session, status } = useSession();
+  // console.log(session);
 
-  if (status === "loading" && !token) {
-    return <PageLoader />;
-  }
+  // if (status === "loading" && !token) {
+  //   return <PageLoader />;
+  // }
 
   if ((user && user.username !== params.id) || user.userType !== 1) {
     router.push(
@@ -31,7 +32,7 @@ const Page = ({ params }) => {
     return <PageLoader />;
   }
 
-  if (!session && !token) {
+  if (!token) {
     router.push("/login");
     return <PageLoader />;
   }
