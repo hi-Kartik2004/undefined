@@ -4,12 +4,16 @@ import AvatarBadge from "./Avatar";
 import Link from "next/link";
 
 const Dropdown = (props) => {
+  let user;
+  if (typeof window !== "undefined") {
+    user = sessionStorage.getItem("user");
+  }
   return (
     <>
       <DropdownMenu.Root>
         <DropdownMenu.Trigger className="cursor-pointer">
           <button className="outline-none border border-gray-500 rounded-lg">
-            <AvatarBadge />
+            <AvatarBadge src={user.image} />
           </button>
         </DropdownMenu.Trigger>
         <DropdownMenu.Content className="mt-1">
