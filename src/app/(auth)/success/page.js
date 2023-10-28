@@ -1,6 +1,7 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
+import PageLoader from "@/app/components/pageloader/Pageloader";
 
 const Success = () => {
   const router = useRouter();
@@ -9,7 +10,7 @@ const Success = () => {
   const userType = searchParams.get("userType");
 
   if (status === "loading") {
-    return <div>loading...</div>;
+    return <PageLoader />;
   }
 
   if (status === "authenticated") {
@@ -31,7 +32,7 @@ const Success = () => {
     }
   }
 
-  return <div>loading...</div>;
+  return <PageLoader />;
 };
 
 export default Success;
