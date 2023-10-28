@@ -14,9 +14,9 @@ const page = ({ params }) => {
 
     if (user && user.username !== params.id) {
       router.replace(
-        user.userType == 1
-          ? `../../creator/${user.username}/drafts`
-          : `../../editor/${user.username}/drafts`
+        user.userType == 2
+          ? `../../editor/${user.username}/drafts`
+          : `../../creator/${user.username}/drafts`
       );
       return <PageLoader />;
     }

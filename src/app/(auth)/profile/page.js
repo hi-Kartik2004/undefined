@@ -4,26 +4,26 @@ import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import PageLoader from "@/app/components/pageloader/Pageloader";
+import Link from "next/link";
 
-const Page = () => {
-  const { data: session, status } = useSession();
-  let user = null;
+const Page = ({ params }) => {
   let token = null;
+  let user = {};
   const router = useRouter();
   if (typeof window !== "undefined") {
     token = sessionStorage.getItem("token");
     user = sessionStorage.getItem("user");
+  }
+  const { data: session, status } = useSession();
+  user = JSON.parse(user);
 
-    user = JSON.parse(user);
+  if (status === "loading" && !token) {
+    return <PageLoader />;
+  }
 
-    if (status === "loading" && !token) {
-      return <PageLoader />;
-    }
-
-    if (!session && !token) {
-      router.push("/login");
-      return <PageLoader />;
-    }
+  if (!session && !token) {
+    router.push("/login");
+    return <PageLoader />;
   }
 
   return (
@@ -41,7 +41,7 @@ const Page = () => {
             />
           ) : (
             <img
-              src={user && user.image}
+              src={user.image}
               width={200}
               height={180}
               alt="user profile image from email"
@@ -49,19 +49,15 @@ const Page = () => {
           )}
         </div>
 
-        <div>
-          UserName : {session ? session.user.name : `${user && user.username}`}
-        </div>
-        <div>
-          Email : {session ? session.user.email : `${user && user.email}`}
-        </div>
+        <div>UserName : {session ? session.user.name : `${user.username}`}</div>
+        <div>Email : {session ? session.user.email : `${user.email}`}</div>
       </div>
-      <button
-        className="p-3 m-5 bg-white text-red-500 rounded-md hover:bg-red-300 hover:text-white"
-        onClick={() => signOut()}
+      <Link
+        href="/logout"
+        className="p-3 m-5 bg-white text-red-500 rounded-md hover:bg-red-300 hover:text-white mt-4"
       >
         Logout
-      </button>
+      </Link>
     </div>
   );
 };

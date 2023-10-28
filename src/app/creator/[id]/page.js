@@ -4,6 +4,7 @@ import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import PageLoader from "@/app/components/pageloader/Pageloader";
+import Link from "next/link";
 
 const Page = ({ params }) => {
   let token = null;
@@ -22,9 +23,9 @@ const Page = ({ params }) => {
 
   if (user && user.username !== params.id) {
     router.push(
-      user.userType == 1
-        ? `/creator/${user.username}`
-        : `/editor/${user.username}`
+      user.userType == 2
+        ? `/editor/${user.username}`
+        : `/creator/${user.username}`
     );
     return <PageLoader />;
   }
@@ -35,7 +36,7 @@ const Page = ({ params }) => {
   }
 
   return (
-    <div>
+    <div className="h-full min-h-screen">
       hello! you are successfully authenticated
       <div className="center flex flex-col">
         <div>
@@ -60,12 +61,12 @@ const Page = ({ params }) => {
         <div>UserName : {session ? session.user.name : `${user.username}`}</div>
         <div>Email : {session ? session.user.email : `${user.email}`}</div>
       </div>
-      <button
-        className="p-3 m-5 bg-white text-red-500 rounded-md hover:bg-red-300 hover:text-white"
-        onClick={() => signOut()}
+      <Link
+        href="/logout"
+        className="p-3 mx-5 mt- bg-white text-red-500 rounded-md hover:bg-red-300 hover:text-white"
       >
         Logout
-      </button>
+      </Link>
     </div>
   );
 };

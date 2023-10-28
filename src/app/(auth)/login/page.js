@@ -29,7 +29,9 @@ const login = () => {
 
   if (status === "authenticated" || token) {
     if (typeof window === "undefined") {
-      router.replace("/profile");
+      router.replace(
+        `/${user.userType === 2 ? "editor" : "creator"}/${user.username}`
+      );
       return null;
     }
 
@@ -84,7 +86,7 @@ const login = () => {
           const user = JSON.stringify(data);
           sessionStorage.setItem("user", user);
           sessionStorage.setItem("token", token);
-          router.push("/editor");
+          router.push(`/editor/${email.split("@")[0]}`);
         })
         .catch((error) => {
           alert("Error:", error);

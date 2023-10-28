@@ -31,9 +31,9 @@ const register = () => {
   if (status === "authenticated" || token) {
     if (typeof window === "undefined") {
       router.push(
-        user.userType == 1
-          ? `/creator/${user.username}`
-          : `/editor/${user.username}`
+        user.userType == 2
+          ? `/editor/${user.username}`
+          : `/creator/${user.username}`
       );
       return null;
     }
