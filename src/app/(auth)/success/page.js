@@ -1,4 +1,4 @@
-import React from "react";
+"use client";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
@@ -9,17 +9,26 @@ const success = () => {
   if (status === "loading") {
     return <div>loading...</div>;
   }
+
   if (status === "authenticated") {
-    session["username"] = session.user.email.split("@")[0];
-    session["userType"] = getParams().userType;
-    sessionStorage.setItem("token", session.accessToken);
-    sessionStorage.setItem("user", JSON.stringify(session));
-    router.push(
-      `/${session.userType === 1 ? "creator" : "editor"}/${session.username}`
-    );
+    const userTypeParam = getParams()?.userType;
+    const userType = userTypeParam ? parseInt(userTypeParam, 10) : null;
+
+    if (userType !== null && userType !== undefined) {
+      session["username"] = session.user.email.split("@")[0];
+      session["userType"] = userType;
+      sessionStorage.setItem("token", session.accessToken);
+      sessionStorage.setItem("user", JSON.stringify(session));
+
+      const routePath =
+        userType === 1
+          ? `/creator/${session.username}`
+          : `/editor/${session.username}`;
+      router.push(routePath);
+    } else {
+      console.error("Invalid userType parameter");
+    }
   }
 
   return <div>loading...</div>;
 };
-
-export default success;
