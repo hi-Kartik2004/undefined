@@ -22,7 +22,7 @@ const Page = ({ params }) => {
     return <PageLoader />;
   }
 
-  if (user && user.username !== params.id) {
+  if ((user && user.username !== params.id) || user.userType !== 1) {
     router.push(
       user.userType == 2
         ? `/editor/${user.username}`

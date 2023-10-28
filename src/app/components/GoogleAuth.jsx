@@ -2,8 +2,7 @@
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/router"; // Use 'next/router' instead of 'next/navigation';
-
+import { useRouter } from "next/navigation"; 
 const GoogleAuth = () => {
   const router = useRouter();
   const [redirecting, setRedirecting] = useState(false);
