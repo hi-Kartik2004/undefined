@@ -61,7 +61,7 @@ const Page = ({ params }) => {
         </div>
 
         <div>UserName : {session ? session.user.name : `${user.username}`}</div>
-        <div>Email : {session ? session.user.email : `${user.email}`}</div>
+        <div>Email : {session ? session.user.email : `${user.user.email}`}</div>
       </div>
       <div className="mt-5">
         <Link
