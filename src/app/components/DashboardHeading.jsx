@@ -45,7 +45,9 @@ const DashboardHeading = (props) => {
   return (
     <>
       <div className="dashboard__content flex flex-wrap gap-4 justify-between pl-2">
-        <h1 className="text-2xl">Uploads ({props.count})</h1>
+        <h1 className="text-2xl">
+          {props.text} ({props.count})
+        </h1>
         <select
           className="outline-none px-2 max-w-[120px] w-full h-[40px] rounded-lg bg-color text-light-color"
           onChange={handleFilter}

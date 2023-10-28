@@ -2,8 +2,8 @@ import React from "react";
 import Link from "next/link";
 import IconLink from "./IconLink";
 
-const Sidebar = () => {
-  const navLinks = ["Drafts", "Uploads", "Issues", "Editors", "Cloud"];
+const Sidebar = (props) => {
+  const navLinks = ["Drafts", "Uploads", "Issues", "Members", "Cloud"];
   return (
     <>
       <div className="hidden md:block h-full">
@@ -21,6 +21,8 @@ const Sidebar = () => {
                     href={`${link}`}
                     count={4}
                     key={index}
+                    userType={props.userType}
+                    username={props.username}
                   />
                 );
               })}
@@ -28,8 +30,18 @@ const Sidebar = () => {
           </div>
 
           <div>
-            <IconLink text="My Plan" href="/plan" />
-            <IconLink text="Settings" href="/settings" />
+            <IconLink
+              text="My Plan"
+              href="/plan"
+              userType={props.userType}
+              username={props.username}
+            />
+            {/* <IconLink
+              text="Settings"
+              href="/settings"
+              userType={props.userType}
+              username={props.username}
+            /> */}
             <IconLink text="Logout" href="/logout" />
           </div>
         </aside>

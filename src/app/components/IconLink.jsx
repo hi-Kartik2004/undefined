@@ -17,7 +17,9 @@ const IconLink = (props) => {
   return (
     <>
       <Link
-        href={`${href}/${props.href ? props.href : "#"}`}
+        href={`/${props.userType === 1 ? "creator" : "editor"}/${
+          props.username
+        }/${props.href ? props.href.toLowerCase() : "#"}`}
         className="flex gap-2 p-2 w-full rounded-lg nav__link duration-300 ease-in-out"
       >
         {props.text == "Uploads" ? (
@@ -28,7 +30,7 @@ const IconLink = (props) => {
           <BsFillCloudCheckFill size={20} />
         ) : props.text == "Issues" ? (
           <MdReportProblem size={20} />
-        ) : props.text == "Editors" ? (
+        ) : props.text == "Members" ? (
           <MdGroups size={20} />
         ) : props.text == "My Plan" ? (
           <FaCrown size={20} />
