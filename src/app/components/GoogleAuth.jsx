@@ -12,14 +12,13 @@ const GoogleAuth = () => {
     try {
       const result = await signIn("google", {
         redirect: false,
-        callbackUrl: "/",
       });
 
-      // Check if the login was successful and user details are available
       if (result?.error) {
         // Handle login error if needed
         console.error("Google login failed:", result.error);
       } else if (result?.user) {
+        user["userType"] = 1;
         const username = result.user.email.split("@")[0];
         const userWithUsername = { ...result.user, username };
 
