@@ -17,7 +17,8 @@ const Success = () => {
     if (userType !== null && typeof window !== "undefined") {
       // Check if window is undefined, not if it's not undefined
       session["username"] = session.user.email.split("@")[0];
-      session["userType"] = parseInt(userType, 10); // Parse userType as an integer
+      session["userType"] = parseInt(userType, 10); 
+      session["image"] = session.user.image;
       sessionStorage.setItem("token", session.accessToken);
       sessionStorage.setItem("user", JSON.stringify(session));
       console.log(session); // Fix typo: "lop" should be "log"
