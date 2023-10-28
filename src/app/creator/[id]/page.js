@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import PageLoader from "@/app/components/pageloader/Pageloader";
 import Link from "next/link";
+import BlackBtn from "@/app/components/BlackBtn";
 
 const Page = ({ params }) => {
   let token = null;
@@ -36,9 +37,9 @@ const Page = ({ params }) => {
   }
 
   return (
-    <div className="h-full min-h-screen">
+    <div>
       hello! you are successfully authenticated
-      <div className="center flex flex-col">
+      <div className="flex flex-col h-full">
         <div>
           User profile Image :
           {session && session.user.image ? (
@@ -60,13 +61,10 @@ const Page = ({ params }) => {
 
         <div>UserName : {session ? session.user.name : `${user.username}`}</div>
         <div>Email : {session ? session.user.email : `${user.email}`}</div>
+        <div className="mt-5">
+          <Link href="/logout" className="py-2 px-3 max-w-[300px] w-full bg-red-700 text-white text font-medium hover:bg-red-500 border border-slate-300 rounded-md">Logout</Link>
+        </div>
       </div>
-      <Link
-        href="/logout"
-        className="p-3 mx-5 mt- bg-white text-red-500 rounded-md hover:bg-red-300 hover:text-white"
-      >
-        Logout
-      </Link>
     </div>
   );
 };

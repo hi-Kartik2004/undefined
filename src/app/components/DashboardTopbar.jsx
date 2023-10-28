@@ -44,7 +44,7 @@ const DashboardTopbar = (props) => {
             children={dialogFormFields}
           />
           <Link
-            href={`${href}/profile`}
+            href={`/profile`}
             className="rounded-md bg-color p-1 flex justify-center items-center w-[40px] h-[40px] border border-gray-500"
           >
             <AvatarBadge />

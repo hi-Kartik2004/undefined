@@ -52,12 +52,14 @@ const Page = ({ params }) => {
         <div>UserName : {session ? session.user.name : `${user.username}`}</div>
         <div>Email : {session ? session.user.email : `${user.email}`}</div>
       </div>
-      <Link
-        href="/logout"
-        className="p-3 m-5 bg-white text-red-500 rounded-md hover:bg-red-300 hover:text-white mt-4"
-      >
-        Logout
-      </Link>
+      <div className="mt-5">
+        <Link
+          href="/logout"
+          className="py-2 px-3 max-w-[300px] w-full bg-red-700 text-white text font-medium hover:bg-red-500 border border-slate-300 rounded-md"
+        >
+          Logout
+        </Link>
+      </div>
     </div>
   );
 };
