@@ -16,7 +16,7 @@ const FormDialog = (props) => {
         </Dialog.Trigger>
 
         <Dialog.Content style={{ maxWidth: 450 }}>
-          <Dialog.Title>Edit profile</Dialog.Title>
+          <Dialog.Title>{props.text}</Dialog.Title>
           <Dialog.Description size="2" mb="4">
             {props.subheading}
           </Dialog.Description>
