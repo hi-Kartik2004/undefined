@@ -19,6 +19,7 @@ const register = () => {
   const confirmPasswordRef = useRef();
   const [userType, setUserType] = useState("creator");
   const { status } = useSession();
+  const [err,setErr] = useState("")
   let token = null;
   if (typeof window !== "undefined") {
     token = sessionStorage.getItem("token");
@@ -46,7 +47,7 @@ const register = () => {
     setUserType(e.target.value);
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
 
     if (passwordRef.current.value !== confirmPasswordRef.current.value) {
@@ -58,40 +59,49 @@ const register = () => {
       username: emailRef.current.value.split("@")[0],
       email: emailRef.current.value,
       password: passwordRef.current.value,
-      image: "https://placehold.co/100",
+      image: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
     };
 
     if (userType === "creator") {
-      fetch("https://uploadmate-api.vercel.app/api/user/signup", {
+      const response = await fetch("https://uploadmate-api.vercel.app/api/user/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          const { token, email } = data;
-          data["userType"] = 1;
-          const user = JSON.stringify(data);
-          sessionStorage.setItem("user", user);
-          sessionStorage.setItem("token", token);
-          router.push(`/creator/${email.split("@")[0]}`);
-        })
-        .catch((error) => {
-          alert("Error:", error);
-        });
+         const data = await response.json()
+
+         if(!response.ok){
+          setErr(data.error);
+        }
+
+       if(response.ok){
+
+         console.log(data);
+         const { token, email } = data;
+         data["userType"] = 1;
+         const user = JSON.stringify(data);
+         sessionStorage.setItem("user", user);
+         sessionStorage.setItem("token", token);
+         router.push(`/creator/${email.split("@")[0]}`);
+        }
+      
     } else {
-      fetch("https://uploadmate-api.vercel.app/api/editor/signup", {
+      const response = await fetch("https://uploadmate-api.vercel.app/api/editor/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       })
-        .then((response) => response.json())
-        .then((data) => {
+        const data = await response.json()
+        
+        if(!response.ok){
+          setErr(data.error);
+        }
+
+        if(response.ok){
           console.log(data);
           const { token, email } = data;
           data["userType"] = 2;
@@ -99,12 +109,9 @@ const register = () => {
           sessionStorage.setItem("user", user);
           sessionStorage.setItem("token", token);
           router.push(`/editor/${data.username}`);
-        })
-        .catch((error) => {
-          alert("Error:", error);
-        });
+        }      
     }
-  };
+}
 
   return (
     <section className="min-h-screen flex flex-col items-center justify-center">
@@ -167,6 +174,13 @@ const register = () => {
                   <p>Editor</p>
                 </label>
               </div>
+
+              {
+              err && 
+              <div className="bg-red-500 p-4 text-center border rounded-sm border-white ">
+               ⚠ {err}
+              </div>
+            }
 
               <div>
                 <HeroBtn text="Register" />
