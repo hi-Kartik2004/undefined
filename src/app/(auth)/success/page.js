@@ -32,3 +32,5 @@ const success = () => {
 
   return <div>loading...</div>;
 };
+
+export default success;
