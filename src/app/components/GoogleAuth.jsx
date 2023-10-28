@@ -1,8 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
+
 const GoogleAuth = () => {
   const router = useRouter();
   const [redirecting, setRedirecting] = useState(false);
@@ -34,11 +35,17 @@ const GoogleAuth = () => {
     }
   };
 
-  // Perform redirection only when redirecting state is true
-  if (redirecting) {
-    router.push(`/creator/${sessionStorage.getItem("user").username}`);
-    return null; // Prevent rendering anything while redirecting
-  }
+  useEffect(() => {
+    // Redirect only when redirecting state is true and user and token are set in sessionStorage
+    if (
+      redirecting &&
+      sessionStorage.getItem("user") &&
+      sessionStorage.getItem("token")
+    ) {
+      const username = JSON.parse(sessionStorage.getItem("user")).username;
+      router.push(`/creator/${username}`);
+    }
+  }, [redirecting]);
 
   return (
     <button

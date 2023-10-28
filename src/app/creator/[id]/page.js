@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import PageLoader from "@/app/components/pageloader/Pageloader";
 import Link from "next/link";
-import BlackBtn from "@/app/components/BlackBtn";
 
 const Page = ({ params }) => {
   let token = null;
@@ -62,7 +61,12 @@ const Page = ({ params }) => {
         <div>UserName : {session ? session.user.name : `${user.username}`}</div>
         <div>Email : {session ? session.user.email : `${user.email}`}</div>
         <div className="mt-5">
-          <Link href="/logout" className="py-2 px-3 max-w-[300px] w-full bg-red-700 text-white text font-medium hover:bg-red-500 border border-slate-300 rounded-md">Logout</Link>
+          <Link
+            href="/logout"
+            className="py-2 px-3 max-w-[300px] w-full bg-red-700 text-white text font-medium hover:bg-red-500 border border-slate-300 rounded-md"
+          >
+            Logout
+          </Link>
         </div>
       </div>
     </div>
