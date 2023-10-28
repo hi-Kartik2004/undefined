@@ -3,7 +3,6 @@ import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-
 const GoogleAuth = () => {
   const router = useRouter();
 
@@ -11,6 +10,7 @@ const GoogleAuth = () => {
     try {
       const result = await signIn("google", {
         redirect: false,
+        callbackUrl: "/",
       });
 
       // Check if the login was successful and user details are available
@@ -25,7 +25,7 @@ const GoogleAuth = () => {
         sessionStorage.setItem("user", JSON.stringify(userWithUsername));
         sessionStorage.setItem("token", result.user.accessToken);
 
-        // Redirect to the user's profile page after successful login
+        // Redirect to the user's profile page after setting session storage
         router.push(`/creator/${username}`);
       }
     } catch (error) {
