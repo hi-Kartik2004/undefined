@@ -13,6 +13,9 @@ import GithubAuth from "../../components/GithubAuth";
 import PageLoader from "@/app/components/pageloader/Pageloader";
 
 const login = () => {
+
+  const [err,setErr] = useState("")
+
   const { status } = useSession();
   const router = useRouter();
   let token = null;
@@ -43,7 +46,7 @@ const login = () => {
     setUserType(e.target.value);
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
 
     const formData = {
@@ -52,15 +55,23 @@ const login = () => {
     };
 
     if (userType === "creator") {
-      fetch("https://uploadmate-api.vercel.app/api/user/login", {
+
+      const response = await fetch("https://uploadmate-api.vercel.app/api/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       })
-        .then((response) => response.json())
-        .then((data) => {
+        
+        const data = await response.json()
+        
+        if(!response.ok){
+          setErr(data.error);
+        }
+
+        if(response.ok){
+
           console.log(data);
           const { token, email } = data;
           data["userType"] = 1;
@@ -68,31 +79,35 @@ const login = () => {
           sessionStorage.setItem("user", user);
           sessionStorage.setItem("token", token);
           router.push(`/creator/${email.split("@")[0]}`);
-        })
-        .catch((error) => {
-          alert("Error:", error);
-        });
-    } else {
-      fetch("https://uploadmate-api.vercel.app/api/editor/login", {
+        }
+          
+    }
+
+     else {
+      const response = await fetch("https://uploadmate-api.vercel.app/api/editor/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          const { token, email } = data;
-          data["userType"] = 2;
-          const user = JSON.stringify(data);
-          sessionStorage.setItem("user", user);
-          sessionStorage.setItem("token", token);
-          router.push(`/editor/${email.split("@")[0]}`);
-        })
-        .catch((error) => {
-          alert("Error:", error);
-        });
+       
+          const data = await response.json()
+          
+          if(!response.ok){
+            setErr(data.error);
+          }
+
+          if(response.ok){
+
+            console.log(data);
+            const { token, email } = data;
+            data["userType"] = 2;
+            const user = JSON.stringify(data);
+            sessionStorage.setItem("user", user);
+            sessionStorage.setItem("token", token);
+            router.push(`/editor/${email.split("@")[0]}`);
+          }  
     }
   };
 
@@ -155,6 +170,12 @@ const login = () => {
               </div>
             </form>
 
+            {
+              err && 
+              <div className="bg-red-500 p-4 text-center border rounded-sm border-white ">
+               ⚠ {err}
+              </div>
+            }
             <Divider text="OR" />
 
             <GoogleAuth />
