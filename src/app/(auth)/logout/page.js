@@ -13,16 +13,16 @@ const Logout = () => {
 
   if (status === "authenticated") {
     signOut();
+    router.push("/login");
   } else {
     if (typeof window !== "undefined") {
       sessionStorage.removeItem("token");
       sessionStorage.removeItem("user");
     }
+    router.push("/login");
   }
 
-  router.push("/login");
   return <PageLoader />;
-
 };
 
 export default Logout;
