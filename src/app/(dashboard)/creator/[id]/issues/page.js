@@ -3,12 +3,40 @@ import DashboardHeading from "@/app/components/DashboardHeading";
 import Dropdown from "@/app/components/Dropdown";
 import GetUser from "@/app/components/GetUser";
 import IssueCard from "@/app/components/IssueCard";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { BsFillFilterSquareFill } from "react-icons/bs";
 
-const issues = () => {
-  <GetUser />;
-  const user = GetUser();
+const issues = ({ params }) => {
+  let token = null;
+  let user = {};
+  const router = useRouter();
+  if (typeof window !== "undefined") {
+    token = sessionStorage.getItem("token");
+    user = sessionStorage.getItem("user");
+    user = JSON.parse(user);
+  }
+  // const { data: session, status } = useSession();
+  // console.log(session);
+
+  // if (status === "loading" && !token) {
+  //   return <PageLoader />;
+  // }
+
+  if ((user && user.username !== params.id) && user.userType !== 1) {
+    router.push(
+      user.userType == 2
+        ? `/editor/${user.username}/drafts`
+        : `/creator/${user.username}/drafts`
+    );
+    return <PageLoader />;
+  }
+
+  if (!token) {
+    router.push("/login");
+    return <PageLoader />;
+  }
+
   const issues = [
     {
       _id: 1,

@@ -1,7 +1,9 @@
+"use client";
 import DashboardHeading from "@/app/components/DashboardHeading";
 import DraftCard from "@/app/components/DraftCard";
+import { useRouter } from "next/navigation";
 
-const drafts = () => {
+const drafts = ({params}) => {
   const drafts = [
     {
       _id: 12,
@@ -61,6 +63,36 @@ const drafts = () => {
       issues: [],
     },
   ];
+
+  let token = null;
+  let user = {};
+  const router = useRouter();
+  if (typeof window !== "undefined") {
+    token = sessionStorage.getItem("token");
+    user = sessionStorage.getItem("user");
+    user = JSON.parse(user);
+  }
+  const session = null;
+  // const { data: session, status } = useSession();
+  // console.log(session);
+
+  // if (status === "loading" && !token) {
+  //   return <PageLoader />;
+  // }
+
+  if ((user && user.username !== params.id) || user.userType !== 1) {
+    router.push(
+      user.userType == 2
+        ? `/editor/${user.username}/drafts`
+        : `/creator/${user.username}/drafts`
+    );
+    return <PageLoader />;
+  }
+
+  if (!token) {
+    router.push("/login");
+    return <PageLoader />;
+  }
 
   return (
     <>

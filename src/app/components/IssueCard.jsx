@@ -6,7 +6,8 @@ import GetUser from "./GetUser";
 
 const IssueCard = ({ details }) => {
   <GetUser />;
-  let user = GetUser();
+  const resp = GetUser();
+  let user = resp.user;
 
   return (
     <>
