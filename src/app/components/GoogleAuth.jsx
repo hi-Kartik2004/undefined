@@ -1,10 +1,12 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router"; // Use 'next/router' instead of 'next/navigation';
+
 const GoogleAuth = () => {
   const router = useRouter();
+  const [redirecting, setRedirecting] = useState(false);
 
   const handleGoogleLogin = async () => {
     try {
@@ -25,13 +27,19 @@ const GoogleAuth = () => {
         sessionStorage.setItem("user", JSON.stringify(userWithUsername));
         sessionStorage.setItem("token", result.user.accessToken);
 
-        // Redirect to the user's profile page after setting session storage
-        router.push(`/creator/${username}`);
+        // Set the redirecting state to true to control the redirection
+        setRedirecting(true);
       }
     } catch (error) {
       console.error("Google login error:", error);
     }
   };
+
+  // Perform redirection only when redirecting state is true
+  if (redirecting) {
+    router.push(`/creator/${sessionStorage.getItem("user").username}`);
+    return null; // Prevent rendering anything while redirecting
+  }
 
   return (
     <button
