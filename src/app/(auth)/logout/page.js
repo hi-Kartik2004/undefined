@@ -1,26 +1,29 @@
 "use client";
-import PageLoader from "@/app/components/pageloader/Pageloader";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import PageLoader from "@/app/components/pageloader/Pageloader";
 
 const Logout = () => {
-  const { status } = useSession();
   const router = useRouter();
-  let token = null;
-  if (typeof window !== "undefined") {
-    token = sessionStorage.getItem("token");
-  }
+  const { status } = useSession();
 
-  if (status === "authenticated") {
-    signOut();
-    router.push("/login");
-  } else {
-    if (typeof window !== "undefined") {
-      sessionStorage.removeItem("token");
-      sessionStorage.removeItem("user");
-    }
-    router.push("/login");
-  }
+  useEffect(() => {
+    const handleLogout = async () => {
+      if (status === "authenticated") {
+        await signOut();
+      }
+
+      if (typeof window !== "undefined") {
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("user");
+      }
+
+      router.push("/login");
+    };
+
+    handleLogout();
+  }, [router, status]);
 
   return <PageLoader />;
 };
