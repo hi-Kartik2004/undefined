@@ -12,6 +12,7 @@ const GoogleAuth = () => {
     try {
       const result = await signIn("google", {
         redirect: false,
+        callbackUrl: "/success?userType=1",
       });
 
       if (result?.error) {
