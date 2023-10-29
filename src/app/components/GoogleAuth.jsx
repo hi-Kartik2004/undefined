@@ -12,7 +12,7 @@ const GoogleAuth = ({ text, userType }) => {
     try {
       const result = await signIn("google", {
         redirect: false,
-        callbackUrl: {`/success?userType=${userType}`},
+        callbackUrl: `/success?userType=${userType}`,
       });
 
       if (result?.error) {
