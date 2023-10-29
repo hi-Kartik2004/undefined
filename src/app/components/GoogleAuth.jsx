@@ -11,7 +11,7 @@ const GoogleAuth = ({ text, userType }) => {
   const handleGoogleLogin = async () => {
     try {
       const result = await signIn("google", {
-        redirect: false,
+        redirect: true,
         callbackUrl: `/success?userType=${userType}`,
       });
 

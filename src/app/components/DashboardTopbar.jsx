@@ -50,7 +50,6 @@ const DashboardTopbar = (props) => {
             <FormDialogForVideo
               text="Add Video"
               subheading="Fill up the details below"
-              children={dialogFormFields}
             />
           )}
 
