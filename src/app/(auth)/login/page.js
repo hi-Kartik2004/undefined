@@ -178,7 +178,7 @@ const login = () => {
 
             <GoogleAuth userType={1} text="Login as Creator with Google" />
             <GoogleAuth userType={2} text="Login as Editor with Google" />
-            <GithubAuth />
+            {/* <GithubAuth /> */}
             {/* <BlackBtn text="Login with Google" icon="google" /> */}
             {/* <BlackBtn text="Login with Github" icon="github" /> */}
 

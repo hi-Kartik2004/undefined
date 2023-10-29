@@ -19,7 +19,7 @@ const register = () => {
   const confirmPasswordRef = useRef();
   const [userType, setUserType] = useState("creator");
   const { status } = useSession();
-  const [err,setErr] = useState("")
+  const [err, setErr] = useState("");
   let token = null;
   if (typeof window !== "undefined") {
     token = sessionStorage.getItem("token");
@@ -63,55 +63,59 @@ const register = () => {
     };
 
     if (userType === "creator") {
-      const response = await fetch("https://uploadmate-api.vercel.app/api/user/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
-         const data = await response.json()
-
-         if(!response.ok){
-          setErr(data.error);
+      const response = await fetch(
+        "https://uploadmate-api.vercel.app/api/user/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
         }
+      );
+      const data = await response.json();
 
-       if(response.ok){
+      if (!response.ok) {
+        setErr(data.error);
+      }
 
-         console.log(data);
-         const { token, email } = data;
-         data["userType"] = 1;
-         const user = JSON.stringify(data);
-         sessionStorage.setItem("user", user);
-         sessionStorage.setItem("token", token);
-         router.push(`/creator/${email.split("@")[0]}`);
-        }
-      
+      if (response.ok) {
+        console.log(data);
+        const { token, email } = data;
+        data["userType"] = 1;
+        const user = JSON.stringify(data);
+        sessionStorage.setItem("user", user);
+        sessionStorage.setItem("token", token);
+        router.push(`/creator/${email.split("@")[0]}`);
+      }
     } else {
-      const response = await fetch("https://uploadmate-api.vercel.app/api/editor/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
-        const data = await response.json()
-        
-        if(!response.ok){
-          setErr(data.error);
+      const response = await fetch(
+        "https://uploadmate-api.vercel.app/api/editor/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
         }
+      );
+      const data = await response.json();
 
-        if(response.ok){
-          console.log(data);
-          const { token, email } = data;
-          data["userType"] = 2;
-          const user = JSON.stringify(data);
-          sessionStorage.setItem("user", user);
-          sessionStorage.setItem("token", token);
-          router.push(`/editor/${data.username}`);
-        }      
+      if (!response.ok) {
+        setErr(data.error);
+      }
+
+      if (response.ok) {
+        console.log(data);
+        const { token, email } = data;
+        data["userType"] = 2;
+        const user = JSON.stringify(data);
+        sessionStorage.setItem("user", user);
+        sessionStorage.setItem("token", token);
+        router.push(`/editor/${data.username}`);
+      }
     }
-}
+  };
 
   return (
     <section className="min-h-screen flex flex-col items-center justify-center">
@@ -175,12 +179,11 @@ const register = () => {
                 </label>
               </div>
 
-              {
-              err && 
-              <div className="bg-red-500 p-4 text-center border rounded-sm border-white ">
-               ⚠ {err}
-              </div>
-            }
+              {err && (
+                <div className="bg-red-500 p-4 text-center border rounded-sm border-white ">
+                  ⚠ {err}
+                </div>
+              )}
 
               <div>
                 <HeroBtn text="Register" />
@@ -189,8 +192,9 @@ const register = () => {
 
             <Divider text="OR" />
 
-            <GoogleAuth />
-            <GithubAuth />
+            <GoogleAuth userType={1} text="Login as Creator with Google" />
+            <GoogleAuth userType={2} text="Login as Editor with Google" />
+            {/* <GithubAuth /> */}
             {/* <BlackBtn text="Register with Google" icon="google" /> */}
 
             {/* <BlackBtn text="Register with Github" icon="github" /> */}
